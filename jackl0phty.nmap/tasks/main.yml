@@ -1,2 +1,36 @@
 ---
 # tasks file for jackl0phty.nmap
+- hosts: all
+  gather_facts: no
+
+  vars:
+    download_url: 'https://nmap.org/dist/nmap-{{ version }}.tar.bz2'
+    version: '6.47'
+    install_type: 'source'
+
+  tasks:
+    - name: download_nmap_source
+      get_url: url={{ download_url }} dest=/tmp/nmap-{{ version }}.tar.bz2
+
+    - stat: path=/tmp/nmap-{{ version }}
+      register: nmap_tmp_dir 
+
+    - name: Uncompress Nmap
+      unarchive: src=/tmp/nmap-{{ version }}.tar.bz2 dest=/tmp
+      when: nmap_tmp_dir.stat.exists == False
+
+    - stat: path=/usr/local/bin/nmap
+      register: bin
+
+    - name: Execute configure script 
+      shell: './configure chdir=/tmp/nmap-{{ version }}'
+      when: bin.stat.exists == False
+
+    - name: Run make
+      shell: 'make chdir=/tmp/nmap-{{ version }}'
+      when: bin.stat.exists == False
+
+    - name: Install Nmap binary
+      shell: 'make install chdir=/tmp/nmap-{{ version }}'
+      sudo: yes
+      when: bin.stat.exists == False
