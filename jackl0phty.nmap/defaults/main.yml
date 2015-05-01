@@ -9,6 +9,3 @@ version: '6.47'
 
 # Nmap download URL ( Used only for installing via source ).
 download_url: 'https://nmap.org/dist/nmap-{{ version }}.tar.bz2'
-
-# Ansible deploy user.
-user: ansible_deployer
