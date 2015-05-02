@@ -6,7 +6,7 @@ Role Name
 
 Requirements
 ------------
-* Ansible core modules.
+Ansible core modules.
 
 Description
 -----------
