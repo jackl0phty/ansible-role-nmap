@@ -1,7 +1,6 @@
 ---
 # tasks file for jackl0phty.nmap
 - hosts: all
-  gather_facts: no
 
   vars:
     nmap_download_url: 'https://nmap.org/dist/nmap-{{ version }}.tar.bz2'
