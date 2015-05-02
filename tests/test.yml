@@ -2,4 +2,4 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - jackl0phty.nmap 
+    - ansible-role-nmap 
