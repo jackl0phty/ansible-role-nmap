@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jackl0phty/ansible-role-nmap.svg?branch=master)](https://travis-ci.org/jackl0phty/ansible-role-nmap)
+
 Role Name
 =========
 # Nmap
