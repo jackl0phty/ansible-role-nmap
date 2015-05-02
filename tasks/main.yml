@@ -1,11 +1,10 @@
 ---
 # tasks file for jackl0phty.nmap
-- hosts: all
 
-  vars:
-    nmap_download_url: 'https://nmap.org/dist/nmap-{{ version }}.tar.bz2'
-    nmap_version: '6.47'
-    nmap_install_type: 'source'
+- vars:
+  nmap_download_url: 'https://nmap.org/dist/nmap-{{ version }}.tar.bz2'
+  nmap_version: '6.47'
+  nmap_install_type: 'source'
 
 - name: download_nmap_source
   get_url: url={{ nmap_download_url }} dest=/tmp/nmap-{{ nmap_version }}.tar.bz2
