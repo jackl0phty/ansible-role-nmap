@@ -5,14 +5,12 @@
 
 - name: download_nmap_source
   get_url: url={{ nmap_download_url }} dest=/tmp/nmap-{{ nmap_version }}.tar.bz2
-
   stat: path=/tmp/nmap-{{ nmap_version }}
   register: nmap_tmp_dir 
 
 - name: Uncompress Nmap
   unarchive: src=/tmp/nmap-{{ nmap_version }}.tar.bz2 dest=/tmp
   when: nmap_tmp_dir.stat.exists == False
-
   stat: path=/usr/local/bin/nmap
   register: bin
 
