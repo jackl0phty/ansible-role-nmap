@@ -1,38 +1,52 @@
 Role Name
 =========
-
-A brief description of the role goes here.
+# Nmap
 
 Requirements
 ------------
+* Ansible core modules.
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Description
+-----------
+[Ansible](http://www.ansible.com/home) role for installing the open source port scanner [Nmap](https://nmap.org/).
+
+This Ansible role will install Nmap from source.
 
 Role Variables
 --------------
+<pre><code>
+Set type of install to do.
+nmap_install_type: 'source'
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Set version of Nmap is installed ( Used only for installing via source ).
+vnmap_ersion: '6.47'
+
+Nmap download URL ( Used only for installing via source ).
+nmap_download_url: 'https://nmap.org/dist/nmap-{{ version }}.tar.bz2'
+</pre></code>
+
+Download and Install the Ansible Nmap role
+------------------------------------------
+<pre><code>
+ansible-galaxy install jackl0phty.nmap
+</pre></code>
+
+Execute the Nmap role against your node
+---------------------------------------
+</pre></code>
+ansible-playbook tasks/main.yml
+</pre></code>
 
 Dependencies
 ------------
-
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+None
 
 Example Playbook
 ----------------
-
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: jackl0phty.nmap, nmap_version: 6.4.7, nmap_install_type: source, nmap_download_url: https://nmap.org/dist/nmap-{{ version }}.tar.bz2 }
 
 License
 -------
-
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Apache 2.0 'The License'.
