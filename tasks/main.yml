@@ -1,7 +1,7 @@
 ---
 # tasks file for jackl0phty.nmap
 
-- include_vars: main.yml 
+- include_vars: vars/main.yml 
 
 - name: download_nmap_source
   get_url: url={{ nmap_download_url }} dest=/tmp/nmap-{{ nmap_version }}.tar.bz2
