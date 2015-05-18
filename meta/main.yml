@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  author: Gerald L. Hevener Jr. 
+  author: Gerald L. Hevener Jr.
   description: Installs Nmap; An open source port scanner.
   company: "Jackl0phty LLC"
   license: "Apache 2.0 'The License'"

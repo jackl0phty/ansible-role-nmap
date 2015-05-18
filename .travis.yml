@@ -12,12 +12,22 @@ install:
   # Install Ansible.
   - pip install ansible
 
+  # Install Ansible Linter tool.
+  - pip install ansible-lint
+
   # Add ansible.cfg to pick up roles path.
   - "{ echo '[defaults]'; echo 'roles_path = ../'; } >> ansible.cfg"
 
 script:
   # Check the role/playbook's syntax.
   - "ansible-playbook -i tests/inventory tests/$SITE --syntax-check"
+
+  # Run linter against *.yml files.
+  - "ansible-lint defaults/main.yml"
+  - "ansible-lint handlers/main.yml"
+  - "ansible-lint meta/main.yml"
+  - "ansible-lint tests/test.yml"
+  - "ansible-lint .travis.yml"
 
   # Run the role/playbook with ansible-playbook.
   - "ansible-playbook -i tests/inventory tests/$SITE --connection=local --sudo"

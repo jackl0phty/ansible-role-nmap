@@ -1,14 +1,14 @@
 ---
 # tasks file for jackl0phty.nmap
 
-- include_vars: main.yml 
+- include_vars: main.yml
 
 - name: download_nmap_source
   get_url: url={{ nmap_download_url }} dest=/tmp/nmap-{{ nmap_version }}.tar.bz2
 
 - name: Save tmp path for nmap
   stat: path=/tmp/nmap-{{ nmap_version }}
-  register: nmap_tmp_dir 
+  register: nmap_tmp_dir
 
 - name: Uncompress Nmap
   unarchive: src=/tmp/nmap-{{ nmap_version }}.tar.bz2 dest=/tmp
@@ -18,7 +18,7 @@
   stat: path=/usr/local/bin/nmap
   register: bin
 
-- name: Execute configure script 
+- name: Execute configure script
   shell: './configure chdir=/tmp/nmap-{{ nmap_version }}'
   when: bin.stat.exists == False
 
