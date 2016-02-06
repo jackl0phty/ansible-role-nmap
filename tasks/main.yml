@@ -1,6 +1,4 @@
 ---
-# Tasks file for jackl0phty.nmap
-
 - hosts: all
 
   tasks:
