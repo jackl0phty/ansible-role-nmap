@@ -12,5 +12,11 @@ galaxy_info:
   - name: Ubuntu
     versions:
     - all
+  - name: Redhat
+    versions:
+    - all
+  - name: CentOS
+    versions:
+    - all
   categories:
     - system
