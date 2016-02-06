@@ -1,32 +1,50 @@
 ---
 # tasks file for jackl0phty.nmap
 
-- include_vars: main.yml
+- hosts: all
+#  become: yes
+#  become_method: sudo
+#  become: true
+#  become_user: root
+#  become_method: sudo
 
-- name: download_nmap_source
-  get_url: url={{ nmap_download_url }} dest=/tmp/nmap-{{ nmap_version }}.tar.bz2
+  tasks:
+    - include_vars: "../vars/main.yml"
+    
+    - name: Install g++ package
+      apt: name=g++ update_cache=yes
+      become: yes
+      become_user: root
 
-- name: Save tmp path for nmap
-  stat: path=/tmp/nmap-{{ nmap_version }}
-  register: nmap_tmp_dir
+    - name: download_nmap_source
+      get_url: url={{ nmap_download_url }} dest=/tmp/nmap-{{ nmap_version }}.tar.bz2
 
-- name: Uncompress Nmap
-  unarchive: src=/tmp/nmap-{{ nmap_version }}.tar.bz2 dest=/tmp
-  when: nmap_tmp_dir.stat.exists == False
+    - name: Save tmp path for nmap
+      stat: path=/tmp/nmap-{{ nmap_version }}
+      register: nmap_tmp_dir
 
-- name: Save location of nmap binary
-  stat: path=/usr/local/bin/nmap
-  register: bin
+    - name: Uncompress Nmap
+      unarchive: src=/tmp/nmap-{{ nmap_version }}.tar.bz2 dest=/tmp copy=no
+      when: nmap_tmp_dir.stat.exists == False
 
-- name: Execute configure script
-  shell: './configure chdir=/tmp/nmap-{{ nmap_version }}'
-  when: bin.stat.exists == False
+    - name: Save location of nmap binary
+      stat: path=/usr/local/bin/nmap
+      register: bin
 
-- name: Run make
-  shell: 'make chdir=/tmp/nmap-{{ nmap_version }}'
-  when: bin.stat.exists == False
+    - name: Execute configure script
+      shell: './configure chdir=/tmp/nmap-{{ nmap_version }}'
+      when: bin.stat.exists == False
+      become: yes
+      become_user: root
 
-- name: Install Nmap binary
-  shell: 'make install chdir=/tmp/nmap-{{ nmap_version }}'
-  sudo: yes
-  when: bin.stat.exists == False
+    - name: Run make
+      shell: 'make chdir=/tmp/nmap-{{ nmap_version }}'
+      when: bin.stat.exists == False
+      become: yes
+      become_user: root
+
+    - name: Install Nmap binary
+      shell: 'make install chdir=/tmp/nmap-{{ nmap_version }}'
+      become: yes
+      become_user: root
+      when: bin.stat.exists == False
