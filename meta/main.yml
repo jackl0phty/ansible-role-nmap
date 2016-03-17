@@ -5,6 +5,7 @@ galaxy_info:
   company: "Jackl0phty LLC"
   license: "Apache 2.0 'The License'"
   min_ansible_version: 1.7
+  dependencies: []
   platforms:
   - name: Debian
     versions:
