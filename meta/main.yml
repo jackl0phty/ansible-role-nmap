@@ -20,5 +20,9 @@ galaxy_info:
   - name: CentOS
     versions:
     - all
-  categories:
-    - system
+  galaxy_tags:
+    - nmap
+    - scanner
+    - port
+    - security
+    - infosec
